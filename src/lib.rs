@@ -39,7 +39,7 @@ pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::
         #input
 
         impl #generics #old_ident #generics {
-            const fn size_of_no_padding() -> usize {
+            pub const fn size_of_no_padding() -> usize {
                 std::mem::size_of::<#new_ident #generics>()
             }
         }
