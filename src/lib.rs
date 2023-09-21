@@ -30,13 +30,12 @@ pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::
     let generics = input.generics.clone();
     let old_ident = input.ident.clone();
     let new_ident = Ident::new(
-        &(format!("{}_SizeOfNoPadding", input.ident)),
+        &(format!("{}SizeOfNoPadding", input.ident)),
         input.ident.span(),
     );
     input.ident = new_ident.clone();
 
     quote! {
-        #[allow(non_camel_case_types)]
         #input
 
         impl #generics #old_ident #generics {
