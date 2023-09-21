@@ -36,6 +36,7 @@ pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::
     input.ident = new_ident.clone();
 
     quote! {
+        #[allow(non_camel_case_types)]
         #input
 
         impl #generics #old_ident #generics {
