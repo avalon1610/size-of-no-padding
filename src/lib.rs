@@ -13,6 +13,7 @@ pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::
 
     input.attrs.clear();
     input.attrs.push(parse_quote!(#[repr(packed)]));
+    input.attrs.push(parse_quote!(#[allow(dead_code)]));
 
     let generics = input.generics.clone();
     let old_ident = input.ident.clone();
