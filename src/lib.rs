@@ -1,6 +1,6 @@
 use proc_macro2::Ident;
 use quote::quote;
-use syn::{parse_macro_input, parse_quote, Data, DeriveInput, Error, Meta};
+use syn::{parse_macro_input, parse_quote, Data, DeriveInput, Error};
 
 #[proc_macro_derive(SizeOfNoPadding)]
 pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
@@ -11,21 +11,8 @@ pub fn derive_size_of_no_padding(input: proc_macro::TokenStream) -> proc_macro::
             .into();
     }
 
-    let mut found = false;
-    input.attrs.iter_mut().for_each(|attr| {
-        if let Meta::List(ml) = &mut attr.meta {
-            for seg in &mut ml.path.segments {
-                if seg.ident == "repr" {
-                    ml.tokens = quote!(packed);
-                    found = true;
-                }
-            }
-        }
-    });
-
-    if !found {
-        input.attrs.push(parse_quote!(#[repr(packed)]));
-    }
+    input.attrs.clear();
+    input.attrs.push(parse_quote!(#[repr(packed)]));
 
     let generics = input.generics.clone();
     let old_ident = input.ident.clone();
