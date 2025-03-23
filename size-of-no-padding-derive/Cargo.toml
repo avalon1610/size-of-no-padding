@@ -1,0 +1,21 @@
+[package]
+name = "size-of-no-padding-derive"
+version = "0.1.5"
+edition = "2021"
+description = "A procedural macro to calculate the size of a type without padding."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/avalon1610/size-of-no-padding"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = "2.0"
+
+
+[dev-dependencies]
+size-of-no-padding = { path = "../size-of-no-padding" }
